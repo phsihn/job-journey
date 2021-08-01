@@ -2,39 +2,38 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 //material ui
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
+import Box from '@material-ui/core/Box';
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
+import { withStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 
 // material ui style
 const styles = (theme) => ({
-	root: {
-		flexGrow: 1,
+	paper: {
+		marginTop: theme.spacing(8),
+		display: 'flex',
 		flexDirection: 'column',
-		justifyContent: 'center',
 		alignItems: 'center',
-		padding: theme.spacing(2),
 	},
-	submitButton: {
-		padding: theme.spacing(1),
-		marginTop: theme.spacing(2),
+	avatar: {
+		margin: theme.spacing(1),
+		backgroundColor: theme.palette.secondary.main,
 	},
-	signupPaper: {
-		textAlign: 'center',
-		margin: theme.spacing(12),
-		[theme.breakpoints.down('sm')]: {
-			marginLeft: theme.spacing(2),
-			marginRight: theme.spacing(2),
-			marginTop: theme.spacing(10),
-		},
+	form: {
+		width: '100%', // Fix IE 11 issue.
+		marginTop: theme.spacing(1),
 	},
-	signupTextField: {
-		marginTop: theme.spacing(2),
+	submit: {
+		margin: theme.spacing(3, 0, 2),
 	},
 });
 class LoginForm extends React.Component {
@@ -90,60 +89,71 @@ class LoginForm extends React.Component {
 	render() {
 		const { classes } = this.props;
 		return (
-			<Grid
-				container
-				direction='column'
-				alignItems='center'
-				justifyContent='center'
-			>
-				<Grid item xs={12} sm={6} lg={3}>
-					<Paper className={classes.signupPaper} elevation={10}>
-						<form onSubmit={this.handleSubmit} className={classes.root}>
-							<div>
-								<LockOpenIcon />
-							</div>
-							<div>
-								<Typography variant='h5'>Login</Typography>
-							</div>
-							<TextField
-								id='outlined-basic'
-								label='Email'
-								type='text'
-								variant='outlined'
-								value={this.state.email}
-								onChange={this.update('email')}
-								fullWidth
-								required
-								className={classes.signupTextField}
-							/>
-
-							<TextField
-								id='outlined-basic'
-								label='Password'
-								type='password'
-								variant='outlined'
-								value={this.state.password}
-								onChange={this.update('password')}
-								fullWidth
-								required
-								className={classes.signupTextField}
-							/>
-
-							<Button
-								type='submit'
-								value='Submit'
-								variant='contained'
-								color='primary'
-								fullWidth
-								className={classes.submitButton}
-							>
-								Login
-							</Button>
-							{this.renderErrors()}
-						</form>
-					</Paper>
-				</Grid>
-			</Grid>
+			<Container component='main' maxWidth='xs'>
+				<CssBaseline />
+				<div className={classes.paper}>
+					<Avatar className={classes.avatar}>
+						<LockOutlinedIcon />
+					</Avatar>
+					<Typography component='h1' variant='h5'>
+						Sign in
+					</Typography>
+					<form className={classes.form} onSubmit={this.handleSubmit}>
+						<TextField
+							variant='outlined'
+							margin='normal'
+							required
+							fullWidth
+							id='email'
+							label='Email Address'
+							name='email'
+							autoComplete='email'
+							autoFocus
+							value={this.state.email}
+							onChange={this.update('email')}
+						/>
+						<TextField
+							variant='outlined'
+							margin='normal'
+							required
+							fullWidth
+							name='password'
+							label='Password'
+							type='password'
+							id='password'
+							autoComplete='current-password'
+							value={this.state.password}
+							onChange={this.update('password')}
+						/>
+						<FormControlLabel
+							control={<Checkbox value='remember' color='primary' />}
+							label='Remember me'
+						/>
+						<Button
+							type='submit'
+							fullWidth
+							variant='contained'
+							color='primary'
+							className={classes.submit}
+						>
+							Sign In
+						</Button>
+						<Grid container>
+							<Grid item xs>
+								<Link href='#' variant='body2'>
+									Forgot password?
+								</Link>
+							</Grid>
+							<Grid item>
+								<Link href='#/signup' variant='body2'>
+									{"Don't have an account? Sign Up"}
+								</Link>
+							</Grid>
+						</Grid>
+					</form>
+				</div>
+				<Box mt={8}></Box>
+			</Container>
 		);
 	}
 }

@@ -1,15 +1,17 @@
 import { connect } from 'react-redux';
+import { composeJob } from '../../actions/job_actions';
 import JobForm from './job_form';
 
 const mapStateToProps = (state) => {
 	return {
-		//errors: state.errors.session,
+		currentUser: state.session.user,
+		newJob: state.jobs.new,
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		//login: (user) => dispatch(login(user)),
+		composeJob: (data) => dispatch(composeJob(data)),
 	};
 };
 

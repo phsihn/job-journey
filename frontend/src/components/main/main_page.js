@@ -1,23 +1,28 @@
 import React from 'react';
-import FeatureCard from '../feature_card/feature_card';
 import { Link } from 'react-router-dom';
 
 // material ui
 import { withStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
+import WorkIcon from '@material-ui/icons/Work';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Grid from '@material-ui/core/Grid';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
 // material ui style
 const styles = (theme) => ({
-	root: {
-		margin: 0,
+	icon: {
+		marginRight: theme.spacing(2),
 	},
-	mainBackgroundImage: {
-		backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://source.unsplash.com/UI81cov4gSY/3000x2000')`,
+	heroContent: {
+		backgroundImage: `url('https://source.unsplash.com/kigHD-rVJzA/3000x2000')`,
 		height: '500px',
 		margin: 0,
 		backgroundPosition: 'center',
@@ -33,81 +38,145 @@ const styles = (theme) => ({
 			height: 300,
 			fontSize: '3em',
 		},
+		padding: theme.spacing(8, 0, 6),
 	},
-	titleText: {
-		margin: theme.spacing(2),
-		[theme.breakpoints.down('sm')]: {
-			fontSize: '0.5em',
-		},
+	heroButtons: {
+		marginTop: theme.spacing(4),
 	},
-	featureContainers: {
-		paddingTop: theme.spacing(3),
+	cardGrid: {
+		paddingTop: theme.spacing(8),
+		paddingBottom: theme.spacing(8),
 	},
-	featureContainerTitle: {
-		fontWeight: 800,
-		paddingBottom: theme.spacing(3),
-		paddingTop: theme.spacing(3),
+	card: {
+		height: '100%',
+		display: 'flex',
+		flexDirection: 'column',
+	},
+	cardMedia: {
+		paddingTop: '56.25%', // 16:9
+	},
+	cardContent: {
+		flexGrow: 1,
+	},
+	footer: {
+		backgroundColor: theme.palette.background.paper,
+		padding: theme.spacing(6),
 	},
 });
 
 class MainPage extends React.Component {
 	render() {
 		const { classes } = this.props;
+		const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 		return (
-			<div className={classes.root}>
-				<Box className={classes.mainBackgroundImage}>
-					<Grid
-						container
-						justify='center'
-						alignItems='center'
-						direction='column'
-					>
-						<Grid item>
-							<Typography variant='h3' className={classes.titleText}>
-								Organize your search
-							</Typography>
-						</Grid>
-						<Grid item>
-							<Typography variant='h6' className={classes.titleText}>
-								Help direct all yoru energy into one area for jobs something
-								lorem
-							</Typography>
-						</Grid>
-						<Grid item>
-							<ButtonGroup
-								color='inherit'
-								aria-label='text primary button group'
-								className={classes.sessionButtons}
-							>
-								<Button component={Link} to='/signup'>
-									Sign up
-								</Button>
-								<Button component={Link} to='/login'>
-									&nbsp;Login&nbsp;
-								</Button>
-							</ButtonGroup>
-						</Grid>
-					</Grid>
-				</Box>
-				<Container maxWidth='lg' className={classes.featuresContainer}>
-					<Box display='flex' alignItems='center' justifyContent='center'>
-						<Typography variant='h4' className={classes.featureContainerTitle}>
-							Features
+			<React.Fragment>
+				<CssBaseline />
+				<AppBar position='relative'>
+					<Toolbar>
+						<WorkIcon className={classes.icon} />
+						<Typography variant='h6' color='inherit' noWrap>
+							Job Journey
 						</Typography>
-					</Box>
-					<Grid container spacing={3}>
-						<Grid item xs={12} sm={6} md={4}>
-							<FeatureCard />
+					</Toolbar>
+				</AppBar>
+				<main>
+					{/* Hero unit */}
+					<div className={classes.heroContent}>
+						<Container maxWidth='sm'>
+							<Typography
+								component='h1'
+								variant='h2'
+								align='center'
+								color='textPrimary'
+								gutterBottom
+							>
+								The Search Begins
+							</Typography>
+							<Typography
+								variant='h5'
+								align='center'
+								color='textSecondary'
+								paragraph
+							>
+								Keep track of your job search all in one place. From scheduled
+								interviews to offers, even rejections. All in one place.
+							</Typography>
+							<div className={classes.heroButtons}>
+								<Grid container spacing={2} justifyContent='center'>
+									<Grid item>
+										<Button
+											component={Link}
+											to='/login'
+											variant='contained'
+											color='primary'
+										>
+											&nbsp;Login&nbsp;
+										</Button>
+									</Grid>
+									<Grid item>
+										<Button
+											component={Link}
+											to='/signup'
+											variant='outlined'
+											color='primary'
+										>
+											Sign up
+										</Button>
+									</Grid>
+								</Grid>
+							</div>
+						</Container>
+					</div>
+					<Container className={classes.cardGrid} maxWidth='md'>
+						{/* End hero unit */}
+						<Grid container spacing={4}>
+							{cards.map((card) => (
+								<Grid item key={card} xs={12} sm={6} md={4}>
+									<Card className={classes.card}>
+										<CardMedia
+											className={classes.cardMedia}
+											image='https://source.unsplash.com/random'
+											title='Image title'
+										/>
+										<CardContent className={classes.cardContent}>
+											<Typography gutterBottom variant='h5' component='h2'>
+												Heading
+											</Typography>
+											<Typography>
+												This is a media card. You can use this section to
+												describe the content.
+											</Typography>
+										</CardContent>
+										<CardActions>
+											<Button size='small' color='primary'>
+												View
+											</Button>
+											<Button size='small' color='primary'>
+												Edit
+											</Button>
+										</CardActions>
+									</Card>
+								</Grid>
+							))}
 						</Grid>
-						<Grid item xs={12} sm={6} md={4}>
-							<FeatureCard />
-						</Grid>
-						<Grid item xs={12} sm={6} md={4}>
-							<FeatureCard />
-						</Grid>
-					</Grid>
-				</Container>
-			</div>
+					</Container>
+				</main>
+				{/* Footer */}
+				<footer className={classes.footer}>
+					<Typography variant='h6' align='center' gutterBottom>
+						Footer
+					</Typography>
+					<Typography
+						variant='subtitle1'
+						align='center'
+						color='textSecondary'
+						component='p'
+					>
+						Something here to give the footer a purpose!
+					</Typography>
+				</footer>
+				{/* End footer */}
+			</React.Fragment>
 		);
 	}
 }

@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import JobFormContainer from '../job_form/job_form_container';
+import JobCard from '../job_card/job_card';
 
 // material ui
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import AddIcon from '@material-ui/icons/Add';
-import NotInterestedIcon from '@material-ui/icons/NotInterested';
-import IconButton from '@material-ui/core/IconButton';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
 
 const styles = (theme) => ({
 	root: {
@@ -39,33 +31,48 @@ const styles = (theme) => ({
 class JobBoard extends Component {
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			jobs: [],
+		};
 	}
 
-	componentWillMount() {}
+	componentWillMount() {
+		console.log(this.props.currentUser);
+		this.props.fetchUserJobs(this.props.currentUser.id);
+	}
 
-	componentDidMount() {}
+	UNSAFE_componentWillReceiveProps(newState) {
+		console.log(newState.jobs);
+		this.setState({ jobs: newState.jobs });
+	}
 
-	componentWillReceiveProps(nextProps) {}
-
-	shouldComponentUpdate(nextProps, nextState) {}
-
-	componentWillUpdate(nextProps, nextState) {}
-
-	componentDidUpdate(prevProps, prevState) {}
-
-	componentWillUnmount() {}
+	renderJobs = () => {
+		return this.state.jobs.map((job) => (
+			<JobCard
+				key={job._id}
+				company={job.company}
+				position={job.position}
+				location={job.location}
+				status={job.status}
+				description={job.description}
+				notes={job.notes}
+				contacts={job.contacts}
+			/>
+		));
+	};
 
 	render() {
 		const { classes } = this.props;
 		return (
-			<Grid container classesName={classes.root}>
+			<Grid container spacing={2} className={classes.root}>
 				<Grid item xs={3}>
 					<Card className={classes.cardCategoryTitle}>
 						<CardContent className={classes.cardContent}>
-							<Typography variant='h6'>Rejected</Typography>
 							<JobFormContainer />
 						</CardContent>
 					</Card>
+					{this.renderJobs()}
 				</Grid>
 				<Grid item xs={3}>
 					hi

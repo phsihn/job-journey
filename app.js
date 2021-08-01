@@ -7,6 +7,7 @@ const passport = require('passport');
 
 // routes
 const users = require('./routes/api/users');
+const jobs = require('./routes/api/jobs');
 
 mongoose
 	.connect(db, { useNewUrlParser: true })
@@ -23,6 +24,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.use('/api/users', users);
+app.use('/api/jobs', jobs);
 
 const port = process.env.PORT || 5000;
 
