@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 // material ui
 import Button from '@material-ui/core/Button';
@@ -48,27 +47,12 @@ class JobForm extends Component {
 			notes: '',
 			contacts: '',
 			open: false,
-			newJob: {},
 		};
 	}
 
-	componentWillMount() {
-		console.log(this.props.currentUser);
-	}
-
-	componentDidMount() {}
-
-	componentWillReceiveProps(nextProps) {
-		console.log(nextProps.newJob);
+	UNSAFE_componentWillReceiveProps(nextProps) {
 		this.setState({ newJob: nextProps.newJob });
-		console.log(this.state.newJob);
 	}
-
-	componentWillUpdate(nextProps, nextState) {}
-
-	componentDidUpdate(prevProps, prevState) {}
-
-	componentWillUnmount() {}
 
 	setOpen = (open) => {
 		this.setState({ open: open });
@@ -96,7 +80,7 @@ class JobForm extends Component {
 			contacts: this.state.contacts,
 		};
 
-		this.props.composeJob(job);
+		this.props.composeJob(job, this.props.currentUser.id);
 		this.setState({
 			company: '',
 			position: '',
@@ -107,6 +91,7 @@ class JobForm extends Component {
 			contacts: '',
 			errors: {},
 		});
+		this.setOpen(false);
 	};
 
 	updateSelected = (event) => {
@@ -127,7 +112,7 @@ class JobForm extends Component {
 	render() {
 		const { classes } = this.props;
 		return (
-			<div>
+			<div className={classes.rott}>
 				<IconButton onClick={this.handleClickOpen}>
 					<AddIcon />
 				</IconButton>
@@ -230,7 +215,6 @@ class JobForm extends Component {
 										fullWidth
 										multiline
 										rows={7}
-										rowMax={7}
 										name='description'
 										label='Description'
 										type='description'
@@ -246,7 +230,6 @@ class JobForm extends Component {
 										fullWidth
 										multiline
 										rows={7}
-										rowMax={7}
 										name='notes'
 										label='Notes'
 										type='notes'

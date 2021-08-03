@@ -2,16 +2,19 @@ import React from 'react';
 
 // material ui
 import { withStyles } from '@material-ui/core/styles';
-
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import CardHeader from '@material-ui/core/CardHeader';
+import Avatar from '@material-ui/core/Avatar';
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 
 const styles = (theme) => ({
 	root: {},
 	card: {
 		//backgroundColor: theme.palette.secondary.light,
-		backgroundColor: 'rgba(229, 115, 115, .3)',
+		backgroundColor: 'rgba(229, 115, 115, .4)',
+		marginTop: theme.spacing(1),
+		marginBottom: theme.spacing(1),
 	},
 	companyName: {
 		...theme.typography.button,
@@ -31,26 +34,28 @@ const styles = (theme) => ({
 });
 
 class JobCard extends React.Component {
+	deleteJob = () => {
+		console.log(this.props.id);
+		this.props.removeJob(this.props.id);
+	};
+
 	render() {
 		const { classes } = this.props;
 
 		return (
 			<Card className={classes.card} variant='outlined'>
-				<CardContent>
-					<Typography
-						className={classes.companyName}
-						variant='h6'
-						component='h6'
-					>
-						{this.props.company}
-					</Typography>
-					<Typography className={classes.pos} color='textSecondary'>
-						{this.props.position}
-					</Typography>
-					<Typography variant='body2' component='p'>
-						{this.props.location}
-					</Typography>
-				</CardContent>
+				<CardHeader
+					avatar={
+						<Avatar aria-label='Company'>{this.props.company.charAt(0)}</Avatar>
+					}
+					title={this.props.company}
+					subheader={this.props.position}
+					action={
+						<IconButton onClick={this.deleteJob}>
+							<DeleteIcon fontSize='small' />
+						</IconButton>
+					}
+				></CardHeader>
 			</Card>
 		);
 	}

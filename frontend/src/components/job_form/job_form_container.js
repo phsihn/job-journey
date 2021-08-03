@@ -11,7 +11,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		composeJob: (data) => dispatch(composeJob(data)),
+		composeJob: (data, id) => dispatch(composeJob(data, id)),
 	};
 };
 

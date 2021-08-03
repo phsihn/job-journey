@@ -56,4 +56,12 @@ router.post(
 	}
 );
 
+router.post('/delete/:id', (req, res) => {
+	Job.findByIdAndDelete({ _id: req.params.id })
+		.then((job) => res.json(job))
+		.catch((err) =>
+			res.status(404).json({ nojobfound: 'No job found with that ID' })
+		);
+});
+
 module.exports = router;

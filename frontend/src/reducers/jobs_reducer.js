@@ -2,6 +2,7 @@ import {
 	RECEIVE_JOBS,
 	RECEIVE_USER_JOBS,
 	RECEIVE_NEW_JOB,
+	DELETE_JOB,
 } from '../actions/job_actions';
 
 const JobsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
@@ -15,7 +16,12 @@ const JobsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
 			newState.user = action.jobs.data;
 			return newState;
 		case RECEIVE_NEW_JOB:
-			newState.new = action.job.data;
+			newState.user = [action.job.data].concat(state.user);
+			return newState;
+		case DELETE_JOB:
+			newState.user = state.user.filter(
+				(job) => job._id !== action.id.data._id
+			);
 			return newState;
 		default:
 			return state;

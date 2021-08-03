@@ -23,20 +23,6 @@ const styles = (theme) => ({
 });
 
 class HomePage extends Component {
-	componentWillMount() {}
-
-	UNSAFE_componentDidMount() {}
-
-	componentWillReceiveProps(nextProps) {}
-
-	shouldComponentUpdate(nextProps, nextState) {}
-
-	UNSAFE_componentWillUpdate(nextProps, nextState) {}
-
-	componentDidUpdate(prevProps, prevState) {}
-
-	componentWillUnmount() {}
-
 	render() {
 		const { classes } = this.props;
 		return (
