@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import JobFormContainer from '../job_form/job_form_container';
 import JobCardContainer from '../job_card/job_card_container';
+import JobCategoryHeader from '../job_category_header/job_category_header';
 
 // material ui
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 
 const styles = (theme) => ({
 	root: {
@@ -47,14 +45,15 @@ class JobBoard extends Component {
 	}
 
 	renderJobs = () => {
-		return this.state.jobs.map((job) => (
+		return this.state.jobs.map((job, index) => (
 			<JobCardContainer
-				key={job._id}
+				key={index}
 				id={job._id}
 				company={job.company}
 				position={job.position}
 				location={job.location}
 				status={job.status}
+				postUrl={job.postUrl}
 				description={job.description}
 				notes={job.notes}
 				contacts={job.contacts}
@@ -67,9 +66,7 @@ class JobBoard extends Component {
 		return (
 			<Grid container spacing={2} className={classes.root}>
 				<Grid item xs={3}>
-					<Card className={classes.cardCategoryTitle}>
-						<CardHeader title='Rejected' action={<JobFormContainer />} />
-					</Card>
+					<JobCategoryHeader />
 					{this.renderJobs()}
 				</Grid>
 				<Grid item xs={3}>

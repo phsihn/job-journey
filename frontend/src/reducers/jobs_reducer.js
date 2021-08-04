@@ -3,6 +3,7 @@ import {
 	RECEIVE_USER_JOBS,
 	RECEIVE_NEW_JOB,
 	DELETE_JOB,
+	UPDATE_JOB,
 } from '../actions/job_actions';
 
 const JobsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
@@ -22,6 +23,16 @@ const JobsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
 			newState.user = state.user.filter(
 				(job) => job._id !== action.id.data._id
 			);
+			return newState;
+		case UPDATE_JOB:
+			//console.log(state.user);
+			//console.log(action.job);
+			const replaceJobIndex = state.user.findIndex(
+				(job) => job._id === action.job.id
+			);
+
+			newState.user = state.user.slice();
+			newState.user[replaceJobIndex] = action.job;
 			return newState;
 		default:
 			return state;

@@ -64,4 +64,24 @@ router.post('/delete/:id', (req, res) => {
 		);
 });
 
+router.post('/edit/:id', (req, res) => {
+	Job.findOneAndUpdate(
+		{ _id: req.params.id },
+		{
+			company: req.body.company,
+			position: req.body.position,
+			location: req.body.location,
+			status: req.body.status,
+			postUrl: req.body.postUrl,
+			description: req.body.description,
+			notes: req.body.notes,
+			contacts: req.body.contacts,
+		}
+	)
+		.then((job) => res.json(job))
+		.catch((err) =>
+			res.status(404).json({ nojobfound: 'No job found with that ID' })
+		);
+});
+
 module.exports = router;

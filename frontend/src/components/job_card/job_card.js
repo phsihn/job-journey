@@ -1,12 +1,16 @@
 import React from 'react';
+import JobFormContainer from '../job_form/job_form_container';
 
 // material ui
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
+import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 
 const styles = (theme) => ({
 	root: {},
@@ -31,9 +35,28 @@ const styles = (theme) => ({
 		backgroundColor: theme.palette.background.paper,
 		padding: theme.spacing(1),
 	},
+	deleteButton: {
+		marginLeft: 'auto',
+	},
 });
 
 class JobCard extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			open: false,
+		};
+	}
+
+	setModalOpen = () => {
+		this.setState({ open: true });
+		console.log(this.props);
+	};
+
+	setModalClose = () => {
+		this.setState({ open: false });
+	};
 	deleteJob = () => {
 		console.log(this.props.id);
 		this.props.removeJob(this.props.id);
@@ -43,19 +66,40 @@ class JobCard extends React.Component {
 		const { classes } = this.props;
 
 		return (
-			<Card className={classes.card} variant='outlined'>
+			<Card raised className={classes.card} variant='outlined'>
 				<CardHeader
 					avatar={
 						<Avatar aria-label='Company'>{this.props.company.charAt(0)}</Avatar>
 					}
 					title={this.props.company}
 					subheader={this.props.position}
-					action={
-						<IconButton onClick={this.deleteJob}>
-							<DeleteIcon fontSize='small' />
-						</IconButton>
-					}
 				></CardHeader>
+				<CardActions disableSpacing>
+					<IconButton onClick={this.setModalOpen}>
+						<VisibilityIcon fontSize='small' />
+					</IconButton>
+					<IconButton onClick={this.setModalOpen}>
+						<EditIcon fontSize='small' />
+					</IconButton>
+					<IconButton onClick={this.deleteJob} className={classes.deleteButton}>
+						<DeleteIcon fontSize='small' />
+					</IconButton>
+				</CardActions>
+
+				<JobFormContainer
+					open={this.state.open}
+					setModalClose={this.setModalClose}
+					id={this.props.id}
+					company={this.props.company}
+					position={this.props.position}
+					location={this.props.location}
+					status={this.props.status}
+					postUrl={this.props.postUrl}
+					description={this.props.description}
+					notes={this.props.notes}
+					contacts={this.props.contacts}
+					addOrEdit='edit'
+				/>
 			</Card>
 		);
 	}

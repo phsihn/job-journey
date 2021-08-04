@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { composeJob } from '../../actions/job_actions';
+import { composeJob, editJob } from '../../actions/job_actions';
 import JobForm from './job_form';
 
 const mapStateToProps = (state) => {
@@ -11,7 +11,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		composeJob: (data, id) => dispatch(composeJob(data, id)),
+		composeJob: (data) => dispatch(composeJob(data)),
+		editJob: (data) => dispatch(editJob(data)),
 	};
 };
 

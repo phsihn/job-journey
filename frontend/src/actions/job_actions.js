@@ -3,12 +3,14 @@ import {
 	getUserJobs,
 	writeJob,
 	deleteJobAxios,
+	editJobAxios,
 } from '../util/job_api_util';
 
 export const RECEIVE_JOBS = 'RECEIVE_JOBS';
 export const RECEIVE_USER_JOBS = 'RECEIVE_USER_JOBS';
 export const RECEIVE_NEW_JOB = 'RECEIVE_NEW_JOB';
 export const DELETE_JOB = 'DELETE_JOB';
+export const UPDATE_JOB = 'UPDATE_JOB';
 
 export const receiveJobs = (jobs) => ({
 	type: RECEIVE_JOBS,
@@ -31,6 +33,11 @@ export const deleteJob = (id) => ({
 	id,
 });
 
+export const updateJob = (job) => ({
+	type: UPDATE_JOB,
+	job,
+});
+
 export const fetchJobs = () => (dispatch) =>
 	getJobs()
 		.then((jobs) => dispatch(receiveJobs(jobs)))
@@ -49,4 +56,9 @@ export const composeJob = (data) => (dispatch) =>
 export const removeJob = (id) => (dispatch) =>
 	deleteJobAxios(id)
 		.then((id) => dispatch(deleteJob(id)))
+		.catch((err) => console.log(err));
+
+export const editJob = (data) => (dispatch) =>
+	editJobAxios(data)
+		.then(() => dispatch(updateJob(data)))
 		.catch((err) => console.log(err));
