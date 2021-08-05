@@ -46,25 +46,32 @@ class JobCard extends React.Component {
 
 		this.state = {
 			open: false,
+			addOrEditOrView: '',
 		};
 	}
 
-	setModalOpen = () => {
-		this.setState({ open: true });
-		console.log(this.props);
+	setModalOpenView = () => {
+		this.setState({ open: true, addOrEditOrView: 'view' });
+		console.log(this.state);
+	};
+
+	setModalOpenEdit = () => {
+		this.setState({ open: true, addOrEditOrView: 'edit' });
+		console.log(this.state);
 	};
 
 	setModalClose = () => {
 		this.setState({ open: false });
 	};
 	deleteJob = () => {
-		console.log(this.props.id);
-		this.props.removeJob(this.props.id);
+		console.log(this.props._id);
+		this.props.removeJob(this.props._id);
 	};
 
 	render() {
 		const { classes } = this.props;
 
+		console.log(this.state.addOrEditOrView);
 		return (
 			<Card raised className={classes.card} variant='outlined'>
 				<CardHeader
@@ -75,21 +82,21 @@ class JobCard extends React.Component {
 					subheader={this.props.position}
 				></CardHeader>
 				<CardActions disableSpacing>
-					<IconButton onClick={this.setModalOpen}>
+					<IconButton onClick={this.setModalOpenView}>
 						<VisibilityIcon fontSize='small' />
 					</IconButton>
-					<IconButton onClick={this.setModalOpen}>
+					<IconButton onClick={this.setModalOpenEdit}>
 						<EditIcon fontSize='small' />
 					</IconButton>
 					<IconButton onClick={this.deleteJob} className={classes.deleteButton}>
 						<DeleteIcon fontSize='small' />
 					</IconButton>
 				</CardActions>
-
 				<JobFormContainer
 					open={this.state.open}
+					addOrEditOrView={this.state.addOrEditOrView}
 					setModalClose={this.setModalClose}
-					id={this.props.id}
+					_id={this.props._id}
 					company={this.props.company}
 					position={this.props.position}
 					location={this.props.location}
@@ -98,7 +105,6 @@ class JobCard extends React.Component {
 					description={this.props.description}
 					notes={this.props.notes}
 					contacts={this.props.contacts}
-					addOrEdit='edit'
 				/>
 			</Card>
 		);

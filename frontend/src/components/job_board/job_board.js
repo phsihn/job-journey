@@ -44,11 +44,34 @@ class JobBoard extends Component {
 		console.log(nextProps.jobs);
 	}
 
+	rednerCategoryHeaders = () => {};
+
 	renderJobs = () => {
 		return this.state.jobs.map((job, index) => (
 			<JobCardContainer
 				key={index}
-				id={job._id}
+				_id={job._id}
+				company={job.company}
+				position={job.position}
+				location={job.location}
+				status={job.status}
+				postUrl={job.postUrl}
+				description={job.description}
+				notes={job.notes}
+				contacts={job.contacts}
+			/>
+		));
+	};
+
+	renderJobsByStatus = (status) => {
+		const statusJobArray = this.state.jobs.filter(
+			(job) => job.status === status
+		);
+
+		return statusJobArray.map((job, index) => (
+			<JobCardContainer
+				key={index}
+				_id={job._id}
 				company={job.company}
 				position={job.position}
 				location={job.location}
@@ -66,17 +89,20 @@ class JobBoard extends Component {
 		return (
 			<Grid container spacing={2} className={classes.root}>
 				<Grid item xs={3}>
-					<JobCategoryHeader />
-					{this.renderJobs()}
+					<JobCategoryHeader title='Applied' />
+					{this.renderJobsByStatus('Applied')}
 				</Grid>
 				<Grid item xs={3}>
-					hi
+					<JobCategoryHeader title='Interview' />
+					{this.renderJobsByStatus('Interview')}
 				</Grid>
 				<Grid item xs={3}>
-					hi
+					<JobCategoryHeader title='Offer' />
+					{this.renderJobsByStatus('Offer')}
 				</Grid>
 				<Grid item xs={3}>
-					hi
+					<JobCategoryHeader title='Rejected' />
+					{this.renderJobsByStatus('Rejected')}
 				</Grid>
 			</Grid>
 		);

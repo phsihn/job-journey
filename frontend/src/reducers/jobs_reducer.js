@@ -20,15 +20,16 @@ const JobsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
 			newState.user = [action.job.data].concat(state.user);
 			return newState;
 		case DELETE_JOB:
+			console.log(action);
 			newState.user = state.user.filter(
 				(job) => job._id !== action.id.data._id
 			);
 			return newState;
 		case UPDATE_JOB:
-			//console.log(state.user);
-			//console.log(action.job);
+			console.log(state.user);
+			console.log(action.job);
 			const replaceJobIndex = state.user.findIndex(
-				(job) => job._id === action.job.id
+				(job) => job._id === action.job._id
 			);
 
 			newState.user = state.user.slice();

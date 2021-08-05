@@ -66,7 +66,7 @@ router.post('/delete/:id', (req, res) => {
 
 router.post('/edit/:id', (req, res) => {
 	Job.findOneAndUpdate(
-		{ _id: req.params.id },
+		{ _id: req.params._id },
 		{
 			company: req.body.company,
 			position: req.body.position,

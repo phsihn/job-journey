@@ -49,7 +49,7 @@ class JobCategoryHeader extends Component {
 		return (
 			<Card className={classes.cardCategoryTitle}>
 				<CardHeader
-					title='Rejected'
+					title={this.props.title}
 					action={
 						<IconButton onClick={this.setModalOpen}>
 							<AddIcon />
@@ -59,7 +59,8 @@ class JobCategoryHeader extends Component {
 				<JobFormContainer
 					open={this.state.open}
 					setModalClose={this.setModalClose}
-					id=''
+					addOrEditOrView='add'
+					_id=''
 					company=''
 					position=''
 					location=''
@@ -68,7 +69,6 @@ class JobCategoryHeader extends Component {
 					description=''
 					notes=''
 					contacts=''
-					addOrEdit='add'
 				/>
 			</Card>
 		);
