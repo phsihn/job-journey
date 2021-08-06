@@ -44,12 +44,22 @@ class JobCategoryHeader extends Component {
 		this.setState({ open: false });
 	};
 
+	getJobCountByCategory = (category) => {
+		return this.props.jobs.filter((job) => job.status === category).length;
+	};
+
 	render() {
 		const { classes } = this.props;
+		console.log(this.props);
 		return (
 			<Card className={classes.cardCategoryTitle}>
 				<CardHeader
-					title={this.props.title}
+					title={
+						<React.Fragment>
+							{this.props.title} ({this.getJobCountByCategory(this.props.title)}
+							)
+						</React.Fragment>
+					}
 					action={
 						<IconButton onClick={this.setModalOpen}>
 							<AddIcon />

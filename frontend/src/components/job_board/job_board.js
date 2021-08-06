@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import JobCardContainer from '../job_card/job_card_container';
-import JobCategoryHeader from '../job_category_header/job_category_header';
+import JobCategoryHeaderContainer from '../job_category_header/job_category_header_container';
 
 // material ui
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 
 const styles = (theme) => ({
 	root: {
@@ -22,6 +23,10 @@ const styles = (theme) => ({
 	},
 	cardContent: {
 		textAlign: 'center',
+	},
+	scrollableColumn: {
+		maxHeight: '80vh',
+		overflow: 'auto',
 	},
 });
 
@@ -43,25 +48,6 @@ class JobBoard extends Component {
 		this.setState({ jobs: nextProps.jobs });
 		console.log(nextProps.jobs);
 	}
-
-	rednerCategoryHeaders = () => {};
-
-	renderJobs = () => {
-		return this.state.jobs.map((job, index) => (
-			<JobCardContainer
-				key={index}
-				_id={job._id}
-				company={job.company}
-				position={job.position}
-				location={job.location}
-				status={job.status}
-				postUrl={job.postUrl}
-				description={job.description}
-				notes={job.notes}
-				contacts={job.contacts}
-			/>
-		));
-	};
 
 	renderJobsByStatus = (status) => {
 		const statusJobArray = this.state.jobs.filter(
@@ -89,20 +75,28 @@ class JobBoard extends Component {
 		return (
 			<Grid container spacing={2} className={classes.root}>
 				<Grid item xs={3}>
-					<JobCategoryHeader title='Applied' />
-					{this.renderJobsByStatus('Applied')}
+					<JobCategoryHeaderContainer title='Applied' />
+					<Box className={classes.scrollableColumn}>
+						{this.renderJobsByStatus('Applied')}
+					</Box>
 				</Grid>
 				<Grid item xs={3}>
-					<JobCategoryHeader title='Interview' />
-					{this.renderJobsByStatus('Interview')}
+					<Box className={classes.scrollableColumn}>
+						<JobCategoryHeaderContainer title='Interview' />
+						{this.renderJobsByStatus('Interview')}
+					</Box>
 				</Grid>
 				<Grid item xs={3}>
-					<JobCategoryHeader title='Offer' />
-					{this.renderJobsByStatus('Offer')}
+					<Box className={classes.scrollableColumn}>
+						<JobCategoryHeaderContainer title='Offer' />
+						{this.renderJobsByStatus('Offer')}
+					</Box>
 				</Grid>
 				<Grid item xs={3}>
-					<JobCategoryHeader title='Rejected' />
-					{this.renderJobsByStatus('Rejected')}
+					<Box className={classes.scrollableColumn}>
+						<JobCategoryHeaderContainer title='Rejected' />
+						{this.renderJobsByStatus('Rejected')}
+					</Box>
 				</Grid>
 			</Grid>
 		);
