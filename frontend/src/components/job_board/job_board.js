@@ -6,6 +6,10 @@ import JobCategoryHeaderContainer from '../job_category_header/job_category_head
 // material ui
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import DoneIcon from '@material-ui/icons/Done';
+import EventAvailableIcon from '@material-ui/icons/EventAvailable';
+import MailOutlineIcon from '@material-ui/icons/MailOutline';
+import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
 
 const styles = (theme) => ({
 	root: {
@@ -41,18 +45,28 @@ class JobBoard extends Component {
 
 	UNSAFE_componentWillMount() {
 		this.props.fetchUserJobs(this.props.currentUser.id);
-		console.log(this.props);
 	}
 
 	UNSAFE_componentWillReceiveProps(nextProps) {
 		this.setState({ jobs: nextProps.jobs });
-		console.log(nextProps.jobs);
 	}
 
 	renderJobsByStatus = (status) => {
 		const statusJobArray = this.state.jobs.filter(
 			(job) => job.status === status
 		);
+
+		let cardColor = '';
+
+		if (status === 'Applied') {
+			cardColor = 'rgba(100, 181, 246)';
+		} else if (status === 'Interview') {
+			cardColor = 'rgba(133, 97, 197)';
+		} else if (status === 'Offer') {
+			cardColor = 'rgba(129, 199, 132)';
+		} else if (status === 'Rejected') {
+			cardColor = 'rgba(229, 115, 115)';
+		}
 
 		return statusJobArray.map((job, index) => (
 			<JobCardContainer
@@ -66,6 +80,7 @@ class JobBoard extends Component {
 				description={job.description}
 				notes={job.notes}
 				contacts={job.contacts}
+				cardColor={cardColor}
 			/>
 		));
 	};
@@ -75,26 +90,46 @@ class JobBoard extends Component {
 		return (
 			<Grid container spacing={2} className={classes.root}>
 				<Grid item xs={3}>
-					<JobCategoryHeaderContainer title='Applied' />
+					<JobCategoryHeaderContainer
+						title='Applied'
+						cardBorderColor='rgba(100, 181, 246)'
+						avatar={<DoneIcon />}
+						status='Applied'
+					/>
 					<Box className={classes.scrollableColumn}>
 						{this.renderJobsByStatus('Applied')}
 					</Box>
 				</Grid>
 				<Grid item xs={3}>
+					<JobCategoryHeaderContainer
+						title='Interview'
+						cardBorderColor='rgba(133, 97, 197)'
+						avatar={<EventAvailableIcon />}
+						status='Interview'
+					/>
 					<Box className={classes.scrollableColumn}>
-						<JobCategoryHeaderContainer title='Interview' />
 						{this.renderJobsByStatus('Interview')}
 					</Box>
 				</Grid>
 				<Grid item xs={3}>
+					<JobCategoryHeaderContainer
+						title='Offer'
+						cardBorderColor='rgba(129, 199, 132)'
+						avatar={<MailOutlineIcon />}
+						status='Offer'
+					/>
 					<Box className={classes.scrollableColumn}>
-						<JobCategoryHeaderContainer title='Offer' />
 						{this.renderJobsByStatus('Offer')}
 					</Box>
 				</Grid>
 				<Grid item xs={3}>
+					<JobCategoryHeaderContainer
+						title='Rejected'
+						cardBorderColor='rgba(229, 115, 115)'
+						avatar={<CancelPresentationIcon />}
+						status='Rejected'
+					/>
 					<Box className={classes.scrollableColumn}>
-						<JobCategoryHeaderContainer title='Rejected' />
 						{this.renderJobsByStatus('Rejected')}
 					</Box>
 				</Grid>

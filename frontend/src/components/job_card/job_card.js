@@ -11,24 +11,21 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import Typography from '@material-ui/core/Typography';
 
-const styles = (theme) => ({
+const styles = (theme, props) => ({
 	root: {},
 	card: {
-		//backgroundColor: theme.palette.secondary.light,
-		backgroundColor: 'rgba(229, 115, 115, .4)',
 		marginTop: theme.spacing(1),
 		marginBottom: theme.spacing(1),
 	},
 	companyName: {
-		...theme.typography.button,
-		//backgroundColor: 'rgba(229, 115, 115, .2)',
-		//padding: theme.spacing(1),
 		fontWeight: 800,
+		color: 'white',
 	},
-	pos: {
-		fontWeight: 600,
-		marginBottom: 12,
+	position: {
+		fontWeight: 400,
+		color: 'white',
 	},
 	textBackground: {
 		...theme.typography.button,
@@ -52,19 +49,16 @@ class JobCard extends React.Component {
 
 	setModalOpenView = () => {
 		this.setState({ open: true, addOrEditOrView: 'view' });
-		console.log(this.state);
 	};
 
 	setModalOpenEdit = () => {
 		this.setState({ open: true, addOrEditOrView: 'edit' });
-		console.log(this.state);
 	};
 
 	setModalClose = () => {
 		this.setState({ open: false });
 	};
 	deleteJob = () => {
-		console.log(this.props._id);
 		this.props.removeJob(this.props._id);
 	};
 
@@ -72,14 +66,28 @@ class JobCard extends React.Component {
 		const { classes } = this.props;
 
 		return (
-			<Card raised className={classes.card} variant='outlined'>
+			<Card
+				raised
+				className={classes.card}
+				variant='outlined'
+				style={{ backgroundColor: this.props.cardColor }}
+			>
 				<CardHeader
 					avatar={
 						<Avatar aria-label='Company'>{this.props.company.charAt(0)}</Avatar>
 					}
-					title={this.props.company}
-					subheader={this.props.position}
+					title={
+						<Typography className={classes.companyName}>
+							{this.props.company}
+						</Typography>
+					}
+					subheader={
+						<Typography className={classes.position}>
+							{this.props.position}
+						</Typography>
+					}
 				></CardHeader>
+
 				<CardActions disableSpacing>
 					<IconButton onClick={this.setModalOpenView}>
 						<VisibilityIcon fontSize='small' />

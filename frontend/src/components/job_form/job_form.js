@@ -74,7 +74,7 @@ class JobForm extends Component {
 				company: '',
 				position: '',
 				location: '',
-				status: '',
+				status: this.props.status,
 				postUrl: '',
 				description: '',
 				notes: '',
@@ -82,7 +82,6 @@ class JobForm extends Component {
 				errors: {},
 			});
 		} else if (this.props.addOrEditOrView === 'edit') {
-			console.log(this.props);
 			let job = {
 				_id: this.props._id,
 				company: this.state.company,
@@ -130,6 +129,9 @@ class JobForm extends Component {
 
 	addOrEditOrViewModal = () => {
 		const { classes } = this.props;
+
+		console.log(this.state);
+		console.log(this.props);
 
 		if (this.props.addOrEditOrView === 'view') {
 			return (
@@ -183,7 +185,12 @@ class JobForm extends Component {
 										<InputLabel fullWidth required>
 											Status
 										</InputLabel>
-										<Select fullWidth label='Status' value={this.state.status}>
+										<Select
+											defaultValue={this.props.status}
+											fullWidth
+											label='Status'
+											value={this.state.status}
+										>
 											<MenuItem value={'Applied'}>Applied</MenuItem>
 											<MenuItem value={'Interview'}>Interview</MenuItem>
 											<MenuItem value={'Offer'}>Offer</MenuItem>
@@ -269,7 +276,7 @@ class JobForm extends Component {
 					open={this.props.open}
 					onClose={this.props.setModalClose}
 				>
-					<DialogTitle>Add Job</DialogTitle>
+					<DialogTitle>Job Information</DialogTitle>
 					<DialogContentText>
 						<form className={classes.form} onSubmit={this.handleSubmit}>
 							<Grid container spacing={2}>

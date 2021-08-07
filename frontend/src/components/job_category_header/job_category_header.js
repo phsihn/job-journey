@@ -7,21 +7,13 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
+import Typography from '@material-ui/core/Typography';
 
 const styles = (theme) => ({
 	root: {
 		display: 'flex',
 	},
-	categoryTitle: {
-		...theme.typography.button,
-		backgroundColor: 'yellow',
-		marginTop: theme.spacing(1),
-		marginBottom: theme.spacing(1),
-	},
-	cardCategoryTitle: {
-		marginTop: theme.spacing(1),
-		marginBottom: theme.spacing(1),
-	},
+	card: { marginTop: theme.spacing(1), marginBottom: theme.spacing(1) },
 	cardContent: {
 		textAlign: 'center',
 	},
@@ -50,15 +42,19 @@ class JobCategoryHeader extends Component {
 
 	render() {
 		const { classes } = this.props;
-		console.log(this.props);
 		return (
-			<Card className={classes.cardCategoryTitle}>
+			<Card
+				className={classes.card}
+				style={{ borderColor: this.props.cardBorderColor }}
+				variant='outlined'
+			>
 				<CardHeader
+					avatar={this.props.avatar}
 					title={
-						<React.Fragment>
+						<Typography>
 							{this.props.title} ({this.getJobCountByCategory(this.props.title)}
 							)
-						</React.Fragment>
+						</Typography>
 					}
 					action={
 						<IconButton onClick={this.setModalOpen}>
@@ -74,7 +70,7 @@ class JobCategoryHeader extends Component {
 					company=''
 					position=''
 					location=''
-					status=''
+					status={this.props.status}
 					postUrl=''
 					description=''
 					notes=''

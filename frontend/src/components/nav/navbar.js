@@ -17,7 +17,6 @@ import { mainListItems } from './list_items';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const drawerWidth = 240;
@@ -184,7 +183,6 @@ class NavBar extends React.Component {
 						<List>{mainListItems}</List>
 						<Divider />
 						<List>
-							<ListSubheader inset>Actions</ListSubheader>
 							<ListItem button onClick={this.logoutUser}>
 								<ListItemIcon>
 									<ExitToAppIcon />
