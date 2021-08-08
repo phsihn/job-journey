@@ -214,7 +214,7 @@ class MainPage extends React.Component {
 						</Link>{' '}
 						or{' '}
 						<Link to='/signup' className={classes.link}>
-							Signup
+							Sign up
 						</Link>
 					</Typography>
 				</footer>
