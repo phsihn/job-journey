@@ -48,9 +48,7 @@ class JobBoard extends Component {
 	}
 
 	UNSAFE_componentWillReceiveProps(nextProps) {
-		this.setState({ jobs: nextProps.jobs }, () => {
-			console.log(this.state);
-		});
+		this.setState({ jobs: nextProps.jobs }, () => {});
 	}
 
 	renderJobsByStatus = (status) => {

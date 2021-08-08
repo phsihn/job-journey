@@ -1,10 +1,10 @@
 // initial setup
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 const db = require('./config/keys').mongoURI;
 const app = express();
 const passport = require('passport');
-const path = require('path');
 
 // routes
 const users = require('./routes/api/users');
