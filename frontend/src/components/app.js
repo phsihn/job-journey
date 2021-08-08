@@ -5,7 +5,8 @@ import { Switch } from 'react-router-dom';
 import MainPage from './main/main_page';
 import LoginFormContainer from './session/login_form_container';
 import SignupFormContainer from './session/signup_form_container';
-import HomePageContainer from './home/home_page_container';
+import HomePage from './home/home_page';
+import AboutPage from './about/about_page';
 
 const App = () => (
 	<Switch>
@@ -13,7 +14,8 @@ const App = () => (
 		<AuthRoute exact path='/login' component={LoginFormContainer} />
 		<AuthRoute exact path='/signup' component={SignupFormContainer} />
 
-		<ProtectedRoute exact path='/home' component={HomePageContainer} />
+		<ProtectedRoute exact path='/home' component={HomePage} />
+		<ProtectedRoute exact path='/about' component={AboutPage} />
 	</Switch>
 );
 

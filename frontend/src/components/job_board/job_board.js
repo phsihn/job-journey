@@ -89,7 +89,7 @@ class JobBoard extends Component {
 		const { classes } = this.props;
 		return (
 			<Grid container spacing={2} className={classes.root}>
-				<Grid item xs={3}>
+				<Grid item xs={12} sm={6} md={3}>
 					<JobCategoryHeaderContainer
 						title='Applied'
 						cardBorderColor='rgba(30, 136, 229)'
@@ -100,7 +100,7 @@ class JobBoard extends Component {
 						{this.renderJobsByStatus('Applied')}
 					</Box>
 				</Grid>
-				<Grid item xs={3}>
+				<Grid item xs={12} sm={6} md={3}>
 					<JobCategoryHeaderContainer
 						title='Interview'
 						cardBorderColor='rgba(57, 73, 171)'
@@ -111,7 +111,7 @@ class JobBoard extends Component {
 						{this.renderJobsByStatus('Interview')}
 					</Box>
 				</Grid>
-				<Grid item xs={3}>
+				<Grid item xs={12} sm={6} md={3}>
 					<JobCategoryHeaderContainer
 						title='Offer'
 						cardBorderColor='rgba(67, 160, 71)'
@@ -122,7 +122,7 @@ class JobBoard extends Component {
 						{this.renderJobsByStatus('Offer')}
 					</Box>
 				</Grid>
-				<Grid item xs={3}>
+				<Grid item xs={12} sm={6} md={3}>
 					<JobCategoryHeaderContainer
 						title='Rejected'
 						cardBorderColor='rgba(229, 57, 53)'
