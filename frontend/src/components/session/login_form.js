@@ -1,5 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 //material ui
 import Avatar from '@material-ui/core/Avatar';
@@ -8,7 +9,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -34,6 +34,9 @@ const styles = (theme) => ({
 	},
 	submit: {
 		margin: theme.spacing(3, 0, 2),
+	},
+	link: {
+		textDecoration: 'none',
 	},
 });
 class LoginForm extends React.Component {
@@ -140,13 +143,13 @@ class LoginForm extends React.Component {
 						</Button>
 						<Grid container>
 							<Grid item xs>
-								<Link href='#' variant='body2'>
-									Forgot password?
+								<Link to='/' className={classes.link}>
+									Back to home page
 								</Link>
 							</Grid>
 							<Grid item>
-								<Link href='#/signup' variant='body2'>
-									{"Don't have an account? Sign Up"}
+								<Link to='/signup' className={classes.link}>
+									Don't have an account? Sign Up
 								</Link>
 							</Grid>
 						</Grid>

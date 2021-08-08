@@ -17,5 +17,5 @@ export const deleteJobAxios = (id) => {
 };
 
 export const editJobAxios = (data) => {
-	return axios.post(`/api/jobs/edit/${data.id}`, data);
+	return axios.post(`/api/jobs/edit/${data._id}`, data);
 };

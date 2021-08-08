@@ -4,7 +4,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import InfoIcon from '@material-ui/icons/Info';
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom';
 
 export const mainListItems = (
 	<div>
@@ -18,7 +18,7 @@ export const mainListItems = (
 			<ListItemIcon>
 				<InfoIcon />
 			</ListItemIcon>
-			<ListItemText primary='About' />
+			<ListItemText primary='Coming Soon...' />
 		</ListItem>
 	</div>
 );

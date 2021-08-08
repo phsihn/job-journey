@@ -1,5 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import JobBoardImage from '../../assets/job_board_main.png';
+import JobFormImage from '../../assets/job_form.png';
+import JobViewImage from '../../assets/job_view.png';
 
 // material ui
 import { withStyles } from '@material-ui/core/styles';
@@ -7,7 +10,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import WorkIcon from '@material-ui/icons/Work';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -62,12 +64,61 @@ const styles = (theme) => ({
 		backgroundColor: theme.palette.background.paper,
 		padding: theme.spacing(6),
 	},
+	link: {
+		textDecoration: 'none',
+	},
 });
 
 class MainPage extends React.Component {
+	renderCardTextDetails = (card) => {
+		if (card === JobBoardImage) {
+			return (
+				<React.Fragment>
+					<Typography gutterBottom variant='h5' component='h2'>
+						The Job Board
+					</Typography>
+					<Typography>
+						The job board allows you to keep track of all your applications in
+						one place. With a nice color coded scheme, add your job applications
+						and organize them by their status. Never forget where your job
+						applications are again.
+					</Typography>
+				</React.Fragment>
+			);
+		} else if (card === JobFormImage) {
+			return (
+				<React.Fragment>
+					<Typography gutterBottom variant='h5' component='h2'>
+						The Job Form
+					</Typography>
+					<Typography>
+						Include all different types of information about the job application
+						you submitted. From the basics like company name and the position,
+						add special notes or even keep track of your contacts from that
+						company.
+					</Typography>
+				</React.Fragment>
+			);
+		} else if (card === JobViewImage) {
+			return (
+				<React.Fragment>
+					<Typography gutterBottom variant='h5' component='h2'>
+						The Job View
+					</Typography>
+					<Typography>
+						Comfortably view all the information tied with your job application.
+						Easily refer to the notes you might have left yourself for that
+						application or maybe just give yourself a refresher on the
+						description of the role.
+					</Typography>
+				</React.Fragment>
+			);
+		}
+	};
+
 	render() {
 		const { classes } = this.props;
-		const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+		const cards = [JobBoardImage, JobFormImage, JobViewImage];
 		return (
 			<React.Fragment>
 				<CssBaseline />
@@ -98,8 +149,8 @@ class MainPage extends React.Component {
 								color='textSecondary'
 								paragraph
 							>
-								Keep track of your job search all in one place. From scheduled
-								interviews to offers, even rejections. All in one place.
+								Keep track of your job search from interviews to offers, even
+								rejections. All in one place.
 							</Typography>
 							<div className={classes.heroButtons}>
 								<Grid container spacing={2} justifyContent='center'>
@@ -131,30 +182,16 @@ class MainPage extends React.Component {
 						{/* End hero unit */}
 						<Grid container spacing={4}>
 							{cards.map((card) => (
-								<Grid item key={card} xs={12} sm={6} md={4}>
-									<Card className={classes.card}>
+								<Grid item key={card} xs={12}>
+									<Card raised className={classes.card}>
 										<CardMedia
 											className={classes.cardMedia}
-											image='https://source.unsplash.com/random'
+											image={card}
 											title='Image title'
 										/>
 										<CardContent className={classes.cardContent}>
-											<Typography gutterBottom variant='h5' component='h2'>
-												Heading
-											</Typography>
-											<Typography>
-												This is a media card. You can use this section to
-												describe the content.
-											</Typography>
+											{this.renderCardTextDetails(card)}
 										</CardContent>
-										<CardActions>
-											<Button size='small' color='primary'>
-												View
-											</Button>
-											<Button size='small' color='primary'>
-												Edit
-											</Button>
-										</CardActions>
 									</Card>
 								</Grid>
 							))}
@@ -164,7 +201,7 @@ class MainPage extends React.Component {
 				{/* Footer */}
 				<footer className={classes.footer}>
 					<Typography variant='h6' align='center' gutterBottom>
-						Footer
+						Get started!
 					</Typography>
 					<Typography
 						variant='subtitle1'
@@ -172,7 +209,13 @@ class MainPage extends React.Component {
 						color='textSecondary'
 						component='p'
 					>
-						Something here to give the footer a purpose!
+						<Link to='/login' className={classes.link}>
+							Login
+						</Link>{' '}
+						or{' '}
+						<Link to='/signup' className={classes.link}>
+							Signup
+						</Link>
 					</Typography>
 				</footer>
 				{/* End footer */}

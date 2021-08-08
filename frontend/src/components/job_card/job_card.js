@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 
 const styles = (theme, props) => ({
 	root: {},
@@ -20,7 +21,7 @@ const styles = (theme, props) => ({
 		marginBottom: theme.spacing(1),
 	},
 	companyName: {
-		fontWeight: 800,
+		fontWeight: 900,
 		color: 'white',
 	},
 	position: {
@@ -66,54 +67,61 @@ class JobCard extends React.Component {
 		const { classes } = this.props;
 
 		return (
-			<Card
-				raised
-				className={classes.card}
-				variant='outlined'
-				style={{ backgroundColor: this.props.cardColor }}
-			>
-				<CardHeader
-					avatar={
-						<Avatar aria-label='Company'>{this.props.company.charAt(0)}</Avatar>
-					}
-					title={
-						<Typography className={classes.companyName}>
-							{this.props.company}
-						</Typography>
-					}
-					subheader={
-						<Typography className={classes.position}>
-							{this.props.position}
-						</Typography>
-					}
-				></CardHeader>
+			<Box boxShadow={4}>
+				<Card
+					raised
+					className={classes.card}
+					variant='outlined'
+					style={{ backgroundColor: this.props.cardColor }}
+				>
+					<CardHeader
+						avatar={
+							<Avatar aria-label='Company'>
+								{this.props.company.charAt(0)}
+							</Avatar>
+						}
+						title={
+							<Typography className={classes.companyName}>
+								{this.props.company}
+							</Typography>
+						}
+						subheader={
+							<Typography className={classes.position}>
+								{this.props.position}
+							</Typography>
+						}
+					></CardHeader>
 
-				<CardActions disableSpacing>
-					<IconButton onClick={this.setModalOpenView}>
-						<VisibilityIcon fontSize='small' />
-					</IconButton>
-					<IconButton onClick={this.setModalOpenEdit}>
-						<EditIcon fontSize='small' />
-					</IconButton>
-					<IconButton onClick={this.deleteJob} className={classes.deleteButton}>
-						<DeleteIcon fontSize='small' />
-					</IconButton>
-				</CardActions>
-				<JobFormContainer
-					open={this.state.open}
-					addOrEditOrView={this.state.addOrEditOrView}
-					setModalClose={this.setModalClose}
-					_id={this.props._id}
-					company={this.props.company}
-					position={this.props.position}
-					location={this.props.location}
-					status={this.props.status}
-					postUrl={this.props.postUrl}
-					description={this.props.description}
-					notes={this.props.notes}
-					contacts={this.props.contacts}
-				/>
-			</Card>
+					<CardActions disableSpacing>
+						<IconButton onClick={this.setModalOpenView}>
+							<VisibilityIcon fontSize='small' />
+						</IconButton>
+						<IconButton onClick={this.setModalOpenEdit}>
+							<EditIcon fontSize='small' />
+						</IconButton>
+						<IconButton
+							onClick={this.deleteJob}
+							className={classes.deleteButton}
+						>
+							<DeleteIcon fontSize='small' />
+						</IconButton>
+					</CardActions>
+					<JobFormContainer
+						open={this.state.open}
+						addOrEditOrView={this.state.addOrEditOrView}
+						setModalClose={this.setModalClose}
+						_id={this.props._id}
+						company={this.props.company}
+						position={this.props.position}
+						location={this.props.location}
+						status={this.props.status}
+						postUrl={this.props.postUrl}
+						description={this.props.description}
+						notes={this.props.notes}
+						contacts={this.props.contacts}
+					/>
+				</Card>
+			</Box>
 		);
 	}
 }

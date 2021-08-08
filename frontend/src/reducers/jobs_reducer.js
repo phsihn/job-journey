@@ -18,6 +18,7 @@ const JobsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
 			return newState;
 		case RECEIVE_NEW_JOB:
 			newState.user = [action.job.data].concat(state.user);
+			console.log(newState.user);
 			return newState;
 		case DELETE_JOB:
 			console.log(action);
@@ -34,6 +35,7 @@ const JobsReducer = (state = { all: {}, user: {}, new: undefined }, action) => {
 
 			newState.user = state.user.slice();
 			newState.user[replaceJobIndex] = action.job;
+			console.log(newState.user);
 			return newState;
 		default:
 			return state;

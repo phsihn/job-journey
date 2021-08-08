@@ -51,7 +51,20 @@ class JobForm extends Component {
 		};
 	}
 
-	UNSAFE_componentWillReceiveProps(nextProps) {}
+	UNSAFE_componentWillReceiveProps(nextProps) {
+		this.setState({
+			_id: nextProps._id,
+			company: nextProps.company,
+			position: nextProps.position,
+			location: nextProps.location,
+			status: nextProps.status,
+			postUrl: nextProps.postUrl,
+			description: nextProps.description,
+			notes: nextProps.notes,
+			contacts: nextProps.contacts,
+			addOrEditOrView: nextProps.addOrEditOrView,
+		});
+	}
 
 	// job form functions
 	handleSubmit = (e) => {
@@ -93,6 +106,7 @@ class JobForm extends Component {
 				notes: this.state.notes,
 				contacts: this.state.contacts,
 			};
+			console.log(job);
 			this.props.editJob(job);
 
 			this.setState({
@@ -129,9 +143,6 @@ class JobForm extends Component {
 
 	addOrEditOrViewModal = () => {
 		const { classes } = this.props;
-
-		console.log(this.state);
-		console.log(this.props);
 
 		if (this.props.addOrEditOrView === 'view') {
 			return (

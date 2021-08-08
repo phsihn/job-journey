@@ -48,7 +48,9 @@ class JobBoard extends Component {
 	}
 
 	UNSAFE_componentWillReceiveProps(nextProps) {
-		this.setState({ jobs: nextProps.jobs });
+		this.setState({ jobs: nextProps.jobs }, () => {
+			console.log(this.state);
+		});
 	}
 
 	renderJobsByStatus = (status) => {
@@ -59,13 +61,13 @@ class JobBoard extends Component {
 		let cardColor = '';
 
 		if (status === 'Applied') {
-			cardColor = 'rgba(100, 181, 246)';
+			cardColor = 'rgba(30, 136, 229, .8)';
 		} else if (status === 'Interview') {
-			cardColor = 'rgba(133, 97, 197)';
+			cardColor = 'rgba(57, 73, 171, .9)';
 		} else if (status === 'Offer') {
-			cardColor = 'rgba(129, 199, 132)';
+			cardColor = 'rgba(67, 160, 71, .9)';
 		} else if (status === 'Rejected') {
-			cardColor = 'rgba(229, 115, 115)';
+			cardColor = 'rgba(229, 57, 53, .85)';
 		}
 
 		return statusJobArray.map((job, index) => (
@@ -92,7 +94,7 @@ class JobBoard extends Component {
 				<Grid item xs={3}>
 					<JobCategoryHeaderContainer
 						title='Applied'
-						cardBorderColor='rgba(100, 181, 246)'
+						cardBorderColor='rgba(30, 136, 229)'
 						avatar={<DoneIcon />}
 						status='Applied'
 					/>
@@ -103,7 +105,7 @@ class JobBoard extends Component {
 				<Grid item xs={3}>
 					<JobCategoryHeaderContainer
 						title='Interview'
-						cardBorderColor='rgba(133, 97, 197)'
+						cardBorderColor='rgba(57, 73, 171)'
 						avatar={<EventAvailableIcon />}
 						status='Interview'
 					/>
@@ -114,7 +116,7 @@ class JobBoard extends Component {
 				<Grid item xs={3}>
 					<JobCategoryHeaderContainer
 						title='Offer'
-						cardBorderColor='rgba(129, 199, 132)'
+						cardBorderColor='rgba(67, 160, 71)'
 						avatar={<MailOutlineIcon />}
 						status='Offer'
 					/>
@@ -125,7 +127,7 @@ class JobBoard extends Component {
 				<Grid item xs={3}>
 					<JobCategoryHeaderContainer
 						title='Rejected'
-						cardBorderColor='rgba(229, 115, 115)'
+						cardBorderColor='rgba(229, 57, 53)'
 						avatar={<CancelPresentationIcon />}
 						status='Rejected'
 					/>
